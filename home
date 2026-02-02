@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocol Camp - Web3 Bootcamp in Asia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .bubble {
+            position: absolute;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
+            border-radius: 50%;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .bubble1 { width: 200px; height: 200px; top: 10%; left: 15%; }
+        .bubble2 { width: 120px; height: 120px; top: 25%; right: 20%; }
+        .bubble3 { width: 400px; height: 400px; top: 20%; right: -100px; }
+        .bubble4 { width: 300px; height: 300px; bottom: -50px; left: -50px; }
+        .bubble5 { width: 150px; height: 150px; bottom: 30%; right: 15%; }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .apply-btn {
+            background: #6366f1;
+            color: white;
+            padding: 10px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px 120px;
+            position: relative;
+            z-index: 5;
+        }
+
+        h1 {
+            font-size: 72px;
+            font-weight: 900;
+            color: #0a0a0a;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 15px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #1a1a1a;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        /* Partner Logos */
+        .partners-section {
+            background: linear-gradient(180deg, #8b7ee6 0%, #7b6fd9 100%);
+            padding: 50px 20px;
+        }
+
+        .partners-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 40px 60px;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .partner-logo {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        /* Feature Section */
+        .feature-section {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .feature-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            height: 450px;
+            display: flex;
+            align-items: flex-end;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450"><rect fill="%23333" width="800" height="450"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .feature-content {
+            padding: 40px;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .feature-years {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .feature-hover {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            color: white;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Builder Journey Section */
+        .journey-section {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 60px;
+        }
+
+        .journey-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .journey-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .journey-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .journey-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+        }
+
+        .journey-info {
+            padding: 30px;
+        }
+
+        .journey-tag {
+            color: #6366f1;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .journey-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #0a0a0a;
+        }
+
+        .journey-link {
+            color: #6366f1;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            background: #f8f9fa;
+            padding: 80px 20px;
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .benefits-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 15px;
+        }
+
+        .benefits-subtitle {
+            font-size: 18px;
+            color: #6b7280;
+            margin-bottom: 60px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .benefit-item {
+            text-align: center;
+        }
+
+        .benefit-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 20px;
+        }
+
+        .benefit-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #0a0a0a;
+        }
+
+        .benefit-description {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: white;
+            padding: 50px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .cta-content h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .cta-content p {
+            font-size: 16px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .learn-more-btn {
+            background: #6366f1;
+            color: white;
+            padding: 14px 35px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        .learn-more-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+
+        .testimonial:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .testimonial-image {
+            width: 300px;
+            height: 280px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .testimonial-content {
+            flex: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .testimonial-text {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-size: 14px;
+            color: #6b7280;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Partners Page */
+        .partners-page {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .partners-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .partners-page-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 60px;
+        }
+
+        .partner-tier {
+            background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .partner-name {
+            font-size: 52px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-bottom: 80px;
+            color: #0a0a0a;
+        }
+
+        .partner-description {
+            font-size: 15px;
+            color: #6b7280;
+            line-height: 1.8;
+            margin-bottom: 80px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            padding: 80px 20px;
+        }
+
+        .faq-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .faq-content {
+            color: white;
+        }
+
+        .faq-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #0a0a0a;
+        }
+
+        .faq-description {
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .view-faq-btn {
+            background: #6366f1;
+            color: white;
+            padding: 12px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            display: inline-block;
+        }
+
+        .faq-robot {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .robot-placeholder {
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            padding: 80px 20px;
+        }
+
+        .newsletter-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.95);
+            padding: 60px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .newsletter-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+        }
+
+        .newsletter-content h2 {
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #0a0a0a;
+        }
+
+        .newsletter-content p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        .newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #4b5563;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 10px;
+            font-size: 11px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .submit-btn {
+            background: #6366f1;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            padding: 80px 20px 40px;
+            color: white;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .organizer-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .organizer-title {
+            font-size: 16px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .organizer-logo {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #0a0a0a;
+        }
+
+        .organizer-description {
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .hashed-logo {
+            font-size: 48px;
+            font-weight: 900;
+            margin: 60px 0 30px;
+            color: #0a0a0a;
+            font-style: italic;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .footer-logo {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0a0a0a;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: #0a0a0a;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 48px; }
+            .nav-links { display: none; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .testimonial { flex-direction: column !important; }
+            .faq-container { grid-template-columns: 1fr; }
+            .newsletter-grid { grid-template-columns: 1fr; }
+            .cta-section { flex-direction: column; gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="bubble bubble1"></div>
+        <div class="bubble bubble2"></div>
+        <div class="bubble bubble3"></div>
+        <div class="bubble bubble4"></div>
+        <div class="bubble bubble5"></div>
+        
+        <nav>
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <span>PROTOCOL<br>CAMP</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#program">Program</a></li>
+                <li><a href="#ecosystem">Ecosystem</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="#faq" style="color: white; text-decoration: none; font-weight: 500;">FAQ</a>
+                <a href="#apply" class="apply-btn">Apply</a>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <h1>PROTOCOL<br>CAMP</h1>
+            <p class="hero-subtitle">Web3 Bootcamp in Asia<br>Learn, Build and Grow</p>
+        </div>
+    </div>
+
+    <!-- Partners Section -->
+    <div class="partners-section">
+        <div class="partners-grid">
+            <div class="partner-logo">SMBC NIKKO</div>
+            <div class="partner-logo">bitkub</div>
+            <div class="partner-logo">APTOS</div>
+            <div class="partner-logo">SCB<sup>x</sup></div>
+            <div class="partner-logo">Airfoil</div>
+            <div class="partner-logo">initia</div>
+            <div class="partner-logo">ALTAVA</div>
+            <div class="partner-logo">klaytn</div>
+            <div class="partner-logo">CIETY</div>
+            <div class="partner-logo">OnePlanet</div>
+            <div class="partner-logo">DSRV</div>
+            <div class="partner-logo">wavebridge</div>
+            <div class="partner-logo">NFT</div>
+        </div>
+    </div>
+
+    <!-- Feature Section -->
+    <div class="feature-section">
+        <div class="feature-container">
+            <div class="feature-card">
+                <div class="feature-content">
+                    <h2 class="feature-title">From Korea to Asia</h2>
+                    <p class="feature-years">2022-2025</p>
+                </div>
+                <div class="feature-hover">Hover to learn more →</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Builder Journey Section -->
+    <div class="journey-section">
+        <h2 class="section-title">Protocol Camp Builder Journey</h2>
+        <div class="journey-grid">
+            <div class="journey-card">
+                <div class="journey-image"></div>
+                <div class="journey-info">
+                    <div class="journey-tag">TRAINING & EDUCATION</div>
+                    <h3 class="journey-title">2-weeks of intensive, hands-on Web3 fundamentals.</h3>
+                    <a href="#" class="journey-link">Hover to Learn More →</a>
+                </div>
+            </div>
+            <div class="journey-card">
+                <div class="journey-image"></div>
+                <div class="journey-info">
+                    <div class="journey-tag">PROJECT ADVISING</div>
+                    <h3 class="journey-title">Expert Guidance from Builders and Operators</h3>
+                    <a href="#" class="journey-link">Hover to Learn More →</a>
+                </div>
+            </div>
+            <div class="journey-card">
+                <div class="journey-image"></div>
+                <div class="journey-info">
+                    <div class="journey-tag">BUILDING & PITCHING</div>
+                    <h3 class="journey-title">Turning Demos into Real Opportunities</h3>
+                    <a href="#" class="journey-link">Hover to Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Benefits Section -->
+    <div class="benefits-section">
+        <div class="benefits-container">
+            <h2 class="benefits-title">More Than Just A Bootcamp</h2>
+            <p class="benefits-subtitle">Designed to support builders from learning to real opportunity.</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon"></div>
+                    <h3 class="benefit-title">Direct Ecosystem Access</h3>
+                    <p class="benefit-description">Engage with a high-impact network of protocol founders, core developers, and VCs in the alumni.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon"></div>
+                    <h3 class="benefit-title">Fully Sponsored Asia Program</h3>
+                    <p class="benefit-description">Receive top-quality training with full coverage for flights and accommodations for all offline sessions in Asia.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon"></div>
+                    <h3 class="benefit-title">Strategic Capital</h3>
+                    <p class="benefit-description">Get access for a personalized pitch and distribution in dealerships to fuel your projects development.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon"></div>
+                    <h3 class="benefit-title">Proven Growth Pathways</h3>
+                    <p class="benefit-description">Connect directly anywhere to leading incubators, venture capital, and long-term ecosystem partnerships.</p>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <div class="cta-content">
+                    <h2>START YOUR WEB3 BUILDER JOURNEY</h2>
+                    <p>A 12-week program designed to foster innovation, collaboration,<br>and education in blockchain and decentralized technology.</p>
+                </div>
+                <a href="#" class="learn-more-btn">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonials-section">
+        <div class="testimonials-container">
+            <div class="testimonial">
+                <div class="testimonial-image"></div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">"Protocol Camp gave us the opportunity to connect with builders across Asia, which gave me the confidence to keep building. The connections within Protocol Camp also helped our project take a major step forward."</p>
+                    <p class="testimonial-author">Yuki, Team Daiko</p>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-image"></div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">"Unlike typical hackathons, Protocol Camp gives you time to validate ideas, test them in real-world scenarios, and build something meaningful."</p>
+                    <p class="testimonial-author">Tze Wei, Team Tom Yum Coin</p>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-image"></div>
+                <div class="testimonial-content">
+                    <p class="testimonial-text">"The mentors, advisors, and judges gave me feedback that completely changed my direction and pushed me to build something more unique and truly suited for the market."</p>
+                    <p class="testimonial-author">Jeahong, Team GenRank</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Partners Page Section -->
+    <div class="partners-page">
+        <div class="partners-container">
+            <h2 class="partners-page-title">2025 OFFICIAL PARTNERS</h2>
+            
+            <div class="partner-tier">TITLE PARTNER</div>
+            <h3 class="partner-name">SMBC NIKKO</h3>
+            
+            <div class="partner-tier">IMPACT PARTNER</div>
+            <h3 class="partner-name">bitkub</h3>
+            <p class="partner-description">Supporting Builders Across Asia Through Expert Knowledge Sharing, Infrastructure, Capital, And Ecosystem Access.</p>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+        <div class="faq-container">
+            <div class="faq-content">
+                <h2 class="faq-title">Got Any<br>Questions?</h2>
+                <p class="faq-description">Find detailed information about our curriculum, application process, and program logistics in our FAQ page.</p>
+                <a href="#" class="view-faq-btn">View All FAQs</a>
+            </div>
+            <div class="faq-robot">
+                <div class="robot-placeholder">🤖</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="newsletter-section">
+        <div class="newsletter-container">
+            <div class="newsletter-grid">
+                <div class="newsletter-content">
+                    <h2>Interested?<br>Subscribe to get<br>more information</h2>
+                    <p>By submitting, you agree to receive email communications.</p>
+                </div>
+                <form class="newsletter-form">
+                    <div class="form-group">
+                        <label>NAME</label>
+                        <input type="text" placeholder="Rachel Smith" required>
+                    </div>
+                    <div class="form-group">
+                        <label>EMAIL</label>
+                        <input type="email" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>INTERESTED PRODUCT TRACK</label>
+                        <select required>
+                            <option value="">Select...</option>
+                            <option value="defi">DeFi</option>
+                            <option value="nft">NFT</option>
+                            <option value="gaming">Gaming</option>
+                            <option value="infrastructure">Infrastructure</option>
+                        </select>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="consent" required>
+                        <label for="consent">By subscribing, you agree to receive marketing communications from Protocol Camp including updates, newsletters, promotions, and updates (as well). You can opt out at any time by following the unsubscribe instructions in our communications or by contacting us directly.</label>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="organizer-section">
+                <p class="organizer-title">Organized by</p>
+                <h3 class="organizer-logo">▲ SHARDLAB</h3>
+                <p class="organizer-description">
+                    ShardLab is the innovation arm of Hashed, a leading fund. Web3 venture capital based in Asia. Under strategic partnership between Hashed and SCBx, the maintainers of Thailand's leading financial technology ecosystem and the parent company of Siam Commercial Bank, ShardLab is revving various innovative activities, such as Web3 R&D, venture building, and ecosystem building.
+                </p>
+                <p class="organizer-description">
+                    Our vision extends to fostering a mass adoption of Web3 in Southeast Asia, making technology accessible and empowering communities in this dynamic digital frontier.
+                </p>
+                <h3 class="hashed-logo">#HASHED</h3>
+                <p class="organizer-description">
+                    Hashed, established in 2017, is a Web3 venture capital that focuses on investment and research in global startups and decentralized protocols. Hashed team operates offices in Seoul, San Francisco, Singapore, Tokyo - bringing a global mindset while accelerating many pioneering blockchain teams globally.
+                </p>
+                <p class="organizer-description">
+                    Hashed is devoted as an ecosystem builder beyond a financial investor, helping Web3 founders build global mass adoption.
+                </p>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-logo">PROTOCOL<br>CAMP</div>
+                <div class="social-links">
+                    <a href="#">✉</a>
+                    <a href="#">𝕏</a>
+                    <a href="#">◉</a>
+                    <a href="#">in</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
